@@ -1,0 +1,16 @@
+[package]
+name = "playground-markdown"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/playground-markdown"
+documentation = "https://docs.rs/playground-markdown"
+description = "Trying out markdown parsing."
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+structopt = "0.2.10"
+pulldown-cmark = "0.1.2"
+
+[build-dependencies]
+structopt = "0.2.10"

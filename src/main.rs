@@ -14,11 +14,11 @@ use structopt::StructOpt;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
   let args = Cli::from_args();
   let raw_md = args.read_to_string()?;
-  let parser = Parser::new(&raw_md);
 
   let mut should_print = false;
   let mut header_level = 0;
-  for event in parser {
+
+  for event in Parser::new(&raw_md) {
     if should_print {
       should_print = false;
       if let Event::Text(txt) = &event {
@@ -26,15 +26,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       }
     }
 
-    match event {
-      Event::Start(event) => match event {
-        Tag::Header(level) => {
-          header_level = level;
-          should_print = true;
-        }
-        _ => {}
-      },
-      _ => {}
+    if let Event::Start(tag) = event {
+      if let Tag::Header(level) = tag {
+        header_level = level;
+        should_print = true;
+      }
     }
   }
 
